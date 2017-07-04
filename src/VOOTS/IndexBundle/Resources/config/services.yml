@@ -1,0 +1,4 @@
+services:
+#    voots_index.example:
+#        class: VOOTS\IndexBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

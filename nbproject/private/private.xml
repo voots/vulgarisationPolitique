@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/VOOTS/UserBundle/DataFixtures/ORM/LoadUser.php</url>
+            <bookmark id="1">
+                <name/>
+                <line>9</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/VOOTS/IndexBundle/Controller/IndexController.php</url>
+            <bookmark id="2">
+                <name/>
+                <line>43</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/index.html.twig</file>
+            <file>file:/C:/wamp64/www/Symfony/web/bundles/vootsindex/style_main.css</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/coupsDeCoeur.html.twig</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/infographiesIndex.html.twig</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/layout.html.twig</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/videosIndex.html.twig</file>
+        </group>
+    </open-files>
+</project-private>

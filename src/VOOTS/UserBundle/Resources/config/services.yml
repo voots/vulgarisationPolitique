@@ -1,0 +1,4 @@
+services:
+#    voots_user.example:
+#        class: VOOTS\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

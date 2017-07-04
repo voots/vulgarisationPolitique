@@ -1,0 +1,9 @@
+{% block radio_widget %}
+{% spaceless %}
+ <label  for="{{ id }}"><input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />{{ label|trans }}</label>
+{% endspaceless %}
+{% endblock radio_widget %}{# empty Twig template #}
+ <div class="integer_widget">
+        {% set type = type|default('star') %}
+        {{ block('form_widget_simple') }}
+    </div>

@@ -1,0 +1,64 @@
+{% extends "VOOTSIndexBundle::layout.html.twig" %}
+
+
+{% block title %}
+    {{ parent() }} - Index
+{% endblock %}
+
+
+{% block body %}
+<div id="about" class="container-fluid text-center">
+ 
+    <table class="table-index">
+        <tr>
+            <td>
+            <a href="{{ path('voots_index_infographies') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image1.png') }}" class="img-responsive image-cliquable"></a> 
+            </td>
+            <td>
+            <img src="{{ asset('bundles/vootsindex/tableau-index/Image2.png') }}" class="img-responsive">
+            </td>
+            <td>
+            <a href="{{ path('voots_index_videos') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image3.png') }}" class="img-responsive image-cliquable"></a>  
+            </td>
+        </tr>
+     </table>
+     <table class="table-index">    
+        <tr>
+            <td>
+            <img src="{{ asset('bundles/vootsindex/tableau-index/Image4.png') }}" class="img-responsive"> 
+            </td>
+            <td>
+            <a href="{{ path('voots_index_apropos') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image5.png') }}" class="img-responsive image-cliquable"></a>
+            </td>
+            <td>
+            <img src="{{ asset('bundles/vootsindex/tableau-index/Image6.png') }}" class="img-responsive">
+            </td>
+        </tr> 
+     </table>
+     <table class="table-index">    
+        <tr>
+            <td>
+            <a href="{{ asset('http://www.blog.voots.fr') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image7.png') }}" class="img-responsive image-cliquable"></a> 
+            </td>
+            <td>
+            <img src="{{ asset('bundles/vootsindex/tableau-index/Image8.png') }}" class="img-responsive">
+            </td>
+            <td>
+            <a href="{{ path('voots_index_coeur') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image9.png') }}" class="img-responsive image-cliquable"></a>
+            </td>
+        </tr>         
+    </table>
+</div> 
+<script>
+$(document).ready(function(){
+    var isChrome = !!window.chrome && !!window.chrome.webstore;
+    if (isChrome) {   
+        $(".image-cliquable").hover(function() {
+
+            $(this).css('width', 'inherit');
+            $(this).css('height', 'inherit');
+          });
+    }   
+});    
+</script> 
+{% endblock %}

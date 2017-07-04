@@ -1,0 +1,89 @@
+{% extends "VOOTSIndexBundle::layout.html.twig" %}
+
+
+{% block title %}
+    {{ parent() }} - Index
+{% endblock %}
+
+{% block sidenav %}
+    <div class="col-sm-1 sidenav">
+    <ul id="list1">
+      <li id='Gouvernement'><a style="cursor:pointer;">GOUVERNEMENT</a></li>
+      <li id='Parlement'><a style="cursor:pointer;">PARLEMENT</a></li>
+      <li id='Président de la république'><a style="cursor:pointer;">PRESIDENT</a></li>
+      <li id='Norme'><a style="cursor:pointer;">NORMES</a></li>
+      <li id='Autres'><a style="cursor:pointer;">AUTRES</a></li>
+    </ul>        
+    </div> 
+{% endblock %}
+
+
+{% block body %}
+<!-- Carousel Infographies -->
+test
+<div id="myCarousel" class="carousel slide container" data-ride="carousel" data-interval="false">
+    <!-- Indicators -->
+    <ul class="carousel-indicators" id='carousel-infographies-indicators'>
+    </ul>
+    <div id="placehere">
+    </div>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" id='carousel-infographies'>
+        <div class="item active"><img src="{{ asset('bundles/vootsindex/infographies/accueil_infographies.jpg') }}"></div>
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev" hidden>
+      <span class="glyphicon glyphicon-chevron-left" style="color:blue"></span>
+      <span class="sr-only">Suivant</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next" hidden>
+      <span class="glyphicon glyphicon-chevron-right" style="color:blue"></span>
+      <span class="sr-only">Precedent</span>
+    </a>
+</div> 
+
+<script>
+$(document).ready(function(){
+        
+    $('#list1 li').click(function(e)
+    {       
+            e = e || window.event;
+            var tag = this.id;
+           
+            $.ajax({
+                url: '{{ path('voots_getInfo') }}',
+                type: 'POST',
+                dataType: 'json',
+                data: {tag: tag},
+                success:function(d){
+                    console.log(d);
+                },
+                error:function(d){
+                    console.log(d);
+                }        
+            }).done(function (response) {
+
+                var myNode = document.getElementById("carousel-infographies");
+                while (myNode.firstChild) {
+                    //on vide le carousel infographies
+                    myNode.removeChild(myNode.firstChild);
+                }      
+                var myNode = document.getElementById("carousel-infographies-indicators");
+                while (myNode.firstChild) {
+                    //on vide le carousel indicators
+                    myNode.removeChild(myNode.firstChild);
+                }            
+                for(var i=0 ; i< response.infographies.length ; i++) {
+                  $("a.carousel-control").show();
+                  $('<div class="item"><img src="/bundles/vootsindex/infographies/'+response.infographies[i].image+'" alt="'+response.infographies[i].nom+'" ></div>').appendTo('.carousel-inner');
+                  $('<li data-target="#carousel-example-generic" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators')
+
+                }
+                $('.item').first().addClass('active');
+                $('.carousel-indicators > li').first().addClass('active');
+                  
+            }); 
+        });
+});
+</script>    
+{% endblock%}
