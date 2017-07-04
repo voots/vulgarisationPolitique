@@ -20,6 +20,11 @@ class IndexController extends Controller
     {
           return $this->render('VOOTSIndexBundle:RepIndexView:apropos.html.twig');
     }
+
+     public function associationsAction()
+    {
+          return $this->render('VOOTSIndexBundle:RepIndexView:associations.html.twig');
+    }    
     
     public function videosAction()
     {

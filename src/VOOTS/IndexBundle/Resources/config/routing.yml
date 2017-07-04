@@ -26,3 +26,7 @@ voots_getInfo:
     path:     /getInfographies
     defaults: { _controller:  VOOTSIndexBundle:Index:getInfographies }
     methods: [post] 
+    
+voots_index_associations:
+    path:     /associations
+    defaults: { _controller:  VOOTSIndexBundle:Index:associations }
