@@ -36,15 +36,34 @@ class infographies
     private $image;
 
     /**
+     * @ORM\OneToOne(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
+     */
+    private $tagPrincipal;    
+    
+    /**
      * @ORM\ManyToMany(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
      */
     private $tags;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="importance", type="integer")
+     */
+    private $importance;    
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -100,34 +119,27 @@ class infographies
     }
 
     /**
-     * Set tag
+     * Set tagPrincipal
      *
-     * @param string $tag
+     * @param \VOOTS\IndexBundle\Entity\tag $tagPrincipal
      *
      * @return infographies
      */
-    public function setTag($tag)
+    public function setTagPrincipal(\VOOTS\IndexBundle\Entity\tag $tagPrincipal = null)
     {
-        $this->tag = $tag;
+        $this->tagPrincipal = $tagPrincipal;
 
         return $this;
     }
 
     /**
-     * Get tag
+     * Get tagPrincipal
      *
-     * @return string
+     * @return \VOOTS\IndexBundle\Entity\tag
      */
-    public function getTag()
+    public function getTagPrincipal()
     {
-        return $this->tag;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->tagPrincipal;
     }
 
     /**
@@ -162,5 +174,29 @@ class infographies
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set importance
+     *
+     * @param integer $importance
+     *
+     * @return infographies
+     */
+    public function setImportance($importance)
+    {
+        $this->importance = $importance;
+
+        return $this;
+    }
+
+    /**
+     * Get importance
+     *
+     * @return integer
+     */
+    public function getImportance()
+    {
+        return $this->importance;
     }
 }

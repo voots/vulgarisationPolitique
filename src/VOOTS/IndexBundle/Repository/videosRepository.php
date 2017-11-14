@@ -14,10 +14,30 @@ class videosRepository extends \Doctrine\ORM\EntityRepository
     public function getVideosWithTagsArray(array $tagsNames)
     {
       $qb = $this->createQueryBuilder('a');
-
       // On fait une jointure avec l'entité Category avec pour alias « c »
       $qb
         ->innerJoin('a.tags', 'c')
+        ->addSelect('c')
+      ;
+      // Puis on filtre sur le nom des catégories à l'aide d'un IN
+      $qb->where($qb->expr()->in('c.nom', $tagsNames));
+      $qb->andWhere($qb->expr()->neq('a.tagPrincipal','c.id' ));
+      // La syntaxe du IN et d'autres expressions se trouve dans la documentation Doctrine
+     
+      // Enfin, on retourne le résultat
+      return $qb
+        ->getQuery()
+        ->getResult()
+      ;
+    }
+    
+    public function getVideoPrincipaleWithTagsArray(array $tagsNames)
+    {
+      $qb = $this->createQueryBuilder('a');
+
+      // On fait une jointure avec l'entité Category avec pour alias « c »
+      $qb
+        ->innerJoin('a.tagPrincipal', 'c')
         ->addSelect('c')
       ;
 
@@ -28,7 +48,7 @@ class videosRepository extends \Doctrine\ORM\EntityRepository
       // Enfin, on retourne le résultat
       return $qb
         ->getQuery()
-        ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)
+        ->getOneOrNullResult();
       ;
     }
 }

@@ -18,6 +18,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
+  
   {% block stylesheets %}
     <link href="{{ asset('bundles/vootsindex/style_main.css') }}" rel="stylesheet" />
   {% endblock %}
@@ -44,49 +45,33 @@
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    {% block navbar %}
-    <div class="navbar-header">
-        <a href="{{ path('voots_index_homepage') }}"><img src="{{ asset('bundles/vootsindex/voots.png') }}" href="#" class="imagelogo" alt="VOOTS"></a>
-    </div>
-    <div class="collapse navbar-collapse">
-        VOOTS Politique Numérique
-      <ul class="nav navbar-nav navbar-right">
-        {% if app.request.attributes.get('_route')!= "voots_index_homepage" %}
-          <li><a href="{{ path('voots_index_videos') }}"><img src="{{ asset('bundles/vootsindex/navbar/IconeVideos.PNG') }}" class="imagemenu" alt="Videos">Vidéos</a></li>
-          <li><a href="{{ path('voots_index_infographies') }}"><img src="{{ asset('bundles/vootsindex/navbar/Info.PNG') }}" class="imagemenu" alt="Videos">Infographies</a></li>
-          <li><a href="{{ asset('http://www.blog.voots.fr') }}"><img src="{{ asset('bundles/vootsindex/navbar/Blog.PNG') }}" class="imagemenu" alt="Videos">Blog</a></li>
-          <li><a href="{{ path('voots_index_coeur') }}"><img src="{{ asset('bundles/vootsindex/navbar/CoupsDeCoeur.PNG') }}" class="imagemenu" alt="Videos">Coups de Coeur</a></li>
-        {% endif %}
-      {#{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}{#
-      <!--  <li><a href="{#{{ path('fos_user_profile_show') }}">{{ app.user.username }} </a></li>
-      <!--  <li><a href="{#{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
-     {# {% else %}
-      <!--  <li><a href="{#{{ path('fos_user_security_login') }}">Connexion</a></li>-->
-     {# {% endif %}#}
-      </ul>
-    </div>
-    {% endblock %}
-     </div>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                {% block navbar %}
+                    <div class="navbar-header">
+                        <a href="{{ path('voots_index_homepage') }}"><img src="{{ asset('bundles/vootsindex/voots.png') }}" href="#" class="imagelogo" alt="VOOTS"></a>
+                    </div>
+                    <div class="collapse navbar-collapse menuTexte">
+                        <a href="{{ path('voots_index_homepage') }}">VOOTS Politique Numérique</a>
+                        <ul class="nav navbar-nav navbar-right">
+                        {#{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}{#
+                        <!--  <li><a href="{#{{ path('fos_user_profile_show') }}">{{ app.user.username }} </a></li>
+                        <!--  <li><a href="{#{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                       {# {% else %}
+                        <!--  <li><a href="{#{{ path('fos_user_security_login') }}">Connexion</a></li>-->
+                       {# {% endif %}#}
+                        {% block boutonsMenu %}
+                        {% endblock %}
+                        </ul>
+                    </div>
+                {% endblock %}
+            </div>
+        </nav>
  
-</nav>
-  <div class="row content">
-      
-  {% block sidenav %}
-  <div class="col-sm-1 sidenav">
-  </div> 
-  {% endblock %}
-  
-  <div class="col-sm-10 text-justify"> 
   {% block body %}
       
   {% endblock %}
-</div>
-<div class="col-sm-1 sidenav">
-</div>  
-</div>
+
 <footer class="container-fluid text-center">
   
     <div class="vocation">VOOTS, un site à vocation citoyenne</div>
@@ -94,7 +79,7 @@
    
         <a class="pied" href="{{ path('voots_index_apropos') }}">A PROPOS DE VOOTS - </a>
     
-        <a class="pied" href="{{ path('voots_index_contact') }}">CONTACT - </a>
+        <a hidden="true" class="pied" href="{{ path('voots_index_contact') }}">CONTACT - </a>
    
         <a href="https://www.facebook.com/VOOTS-1794052280851719/"target="_blank"><button class="btn btn-fb"><i class="fa fa-facebook"></i></button></a>
         <a href="https://twitter.com/voots_officiel"target="_blank"><button class="btn btn-tw"><i class="fa fa-twitter"></i></button></a>

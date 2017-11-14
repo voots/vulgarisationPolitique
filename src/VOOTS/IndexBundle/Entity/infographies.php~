@@ -36,15 +36,34 @@ class infographies
     private $image;
 
     /**
+     * @ORM\OneToOne(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
+     */
+    private $tagPrincipal;    
+    
+    /**
      * @ORM\ManyToMany(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
      */
     private $tags;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="importance", type="integer")
+     */
+    private $importance;    
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -100,27 +119,60 @@ class infographies
     }
 
     /**
-     * Set tag
+     * Set tagPrincipal
      *
-     * @param string $tag
+     * @param \VOOTS\IndexBundle\Entity\tag $tagPrincipal
      *
      * @return infographies
      */
-    public function setTag($tag)
+    public function setTagPrincipal(\VOOTS\IndexBundle\Entity\tag $tagPrincipal = null)
     {
-        $this->tag = $tag;
+        $this->tagPrincipal = $tagPrincipal;
 
         return $this;
     }
 
     /**
-     * Get tag
+     * Get tagPrincipal
      *
-     * @return string
+     * @return \VOOTS\IndexBundle\Entity\tag
      */
-    public function getTag()
+    public function getTagPrincipal()
     {
-        return $this->tag;
+        return $this->tagPrincipal;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \VOOTS\IndexBundle\Entity\tag $tag
+     *
+     * @return infographies
+     */
+    public function addTag(\VOOTS\IndexBundle\Entity\tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \VOOTS\IndexBundle\Entity\tag $tag
+     */
+    public function removeTag(\VOOTS\IndexBundle\Entity\tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
-

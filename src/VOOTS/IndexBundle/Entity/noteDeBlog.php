@@ -5,12 +5,12 @@ namespace VOOTS\IndexBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * minivoots
+ * infographies
  *
- * @ORM\Table(name="minivoots")
- * @ORM\Entity(repositoryClass="VOOTS\IndexBundle\Repository\minivootsRepository")
+ * @ORM\Table(name="infographies")
+ * @ORM\Entity(repositoryClass="VOOTS\IndexBundle\Repository\infographiesRepository")
  */
-class minivoots
+class infographies
 {
     /**
      * @var int
@@ -29,19 +29,12 @@ class minivoots
     private $nom;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="numero", type="integer", nullable=true)
-     */
-    private $numero;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="image", type="string", length=255)
      */
     private $image;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
      */
@@ -63,7 +56,7 @@ class minivoots
      *
      * @param string $nom
      *
-     * @return minivoots
+     * @return infographies
      */
     public function setNom($nom)
     {
@@ -83,35 +76,11 @@ class minivoots
     }
 
     /**
-     * Set numero
-     *
-     * @param integer $numero
-     *
-     * @return minivoots
-     */
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
-
-    /**
-     * Get numero
-     *
-     * @return int
-     */
-    public function getNumero()
-    {
-        return $this->numero;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
      *
-     * @return minivoots
+     * @return infographies
      */
     public function setImage($image)
     {
@@ -129,6 +98,30 @@ class minivoots
     {
         return $this->image;
     }
+
+    /**
+     * Set tag
+     *
+     * @param string $tag
+     *
+     * @return infographies
+     */
+    public function setTag($tag)
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return string
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
     /**
      * Constructor
      */
@@ -142,7 +135,7 @@ class minivoots
      *
      * @param \VOOTS\IndexBundle\Entity\tag $tag
      *
-     * @return minivoots
+     * @return infographies
      */
     public function addTag(\VOOTS\IndexBundle\Entity\tag $tag)
     {

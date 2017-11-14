@@ -1,0 +1,212 @@
+{% extends "VOOTSIndexBundle::layout.html.twig" %}
+
+
+{% block title %}
+    {{ parent() }} - Page Standard
+{% endblock %}
+
+  {% block stylesheets %}
+    <link href="{{ asset('bundles/vootsindex/style_main.css') }}" rel="stylesheet" />
+    <link href="{{ asset('bundles/vootsindex/style_page_principale.css') }}" rel="stylesheet" />
+  {% endblock %}
+ 
+    {% block boutonsMenu %}
+        {% if definition is not null %}<li class="definitionMenuFond"><a class="defintionMenu" href="#definition">DÉFINITION</a></li>{%endif%}
+        {% if video_principale is not null %}<li class="videoMenuFond"><a class="videoMenu" href="#video">VIDÉOS</a></li>{%endif%}
+        {% if explication is not null %}<li class="explicationMenuFond"><a class="explicationMenu" href="#explication">EXPLICATIONS</a></li>{%endif%}
+        {% if infographies is not empty %} <li class="infographieMenuFond"><a class="infographieMenu" href="#infographies">INFOGRAPHIES</a></li>{%endif%}
+        {% if enSavoirPlus is not null %} <li class="savoirPlusMenuFond"><a class="savoirPlusMenu" href="#savoirplus">EN SAVOIR PLUS</a>
+                <a href="#plus" data-toggle="modal"><img src="{{ asset('bundles/vootsindex/plus.png')}}" alt="plus" class="enSavoirPlusImage"></a>
+                    <div class="modal" id="plus">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">x</button>
+                                    <h4 class="modal-title">Pour en savoir plus... </h4>
+                                </div>
+                            <div class="modal-body">
+                                Partie en construction...
+                            </div>
+                            </div>
+                        </div>
+                    </div></li>{%endif%}
+    {% endblock %}
+   
+
+  {% block body %}
+       
+    <div class ="container-fluid definition text-center">
+        <h1>{{definition.tagPrincipal.nom}}</h1>
+        </br>
+        </br>
+       {% if definition is not null %}
+       <div id ="definition">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body contenu">
+                        <h2> Définition </h2>
+                        <p>
+                            {{definition.contenu}}
+                        </p>
+                    </div>
+                </div>  
+             </div>
+        </div> 
+        {%endif%}
+    </div>  
+    {% if video_principale is not null %}
+    <div id="video">
+        <div class="container-fluid video">
+            <div class="row">
+                <div class="col-sm-2">
+                </div>
+                <div class ="col-sm-8">
+                    <div class="panel panel-default contenu-video">
+                        <div class="panel-body video-panel">
+                            {% if video_principale is not null %}
+                             <div class="col-sm-6 text-center">
+                                <h2>
+                                   Vidéo sur le sujet
+                                </h2>
+                                <a href="#" data-toggle="modal" data-target="#videoModal" data-theVideo="{{video_principale.url}}" class="thumbnail">
+                                    <img src="{{ asset(video_principale.image) }}" alt="{{video_principale.alt}}" class="img-responsive img-rounded image-cliquable">
+                                </a>
+                            </div>
+                            {%endif%}    
+                        {% for uneVideo in videos_associees %}
+                            {% if loop.first %}
+                             <div class="col-sm-6 text-center">
+                                
+                                <h2>
+                                       Vidéos associées
+                                </h2>
+                            {%endif%}
+                                {% if (loop.index % 2 == 1)  %}    
+                                <div class ="row">
+                                {%endif%}        
+                                    <div class="col-sm-6">
+                                        <a href="#" data-toggle="modal" data-target="#videoModal" data-theVideo="{{uneVideo.url}}" class="thumbnail">
+                                            <img src="{{ asset(uneVideo.image) }}" alt="{{uneVideo.alt}}" class="img-responsive img-rounded image-cliquable">
+                                        </a>
+                                    </div> 
+                                {% if (loop.index % 2 != 1)  %}        
+                                </div>
+                                {%endif%} 
+                            {% if loop.last %}
+                            </div>
+                            {%endif%}
+                         {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                </div>
+            </div>
+
+            <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <div>
+                                <iframe width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+   {% if explication is not null %}
+    <div id="explication">   
+         <div class="container-fluid text-center">
+            <div class="row">
+                <div class="col-sm-2">
+                </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default explication">
+                        <div class="panel-body explications-panel">
+                            <h2> Explications </h2>
+                            <p>
+                                {{explication.contenu | raw}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                </div>       
+             </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if infographies is not empty %}
+    <div id="infographies">
+        <div class="container-fluid infographies text-center">
+            <div class="row">
+                <div class ="col-sm-2">
+                </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default texte-infographie">
+                        <div class="panel-body infographies-panel">
+                            <h2>
+                                Infographies sur le sujet
+                            </h2>
+                            <div class="row">
+                                {% for uneInfographie in infographies %}
+                                <div class="col-sm-3">
+                                <a href="#infographie{{uneInfographie.id}}" data-toggle="modal"><img src="{{ asset('/bundles/vootsindex/infographies/' ~ uneInfographie.image)}}" alt="{{uneInfographie.nom}}" class="img-thumbnail" ></a>
+                                    <div class="modal" id="infographie{{uneInfographie.id}}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">x</button>
+                                                    <h4 class="modal-title">{{uneInfographie.nom}}</h4>
+                                                </div>
+                                            <div class="modal-body">
+                                                <img src="{{ asset('/bundles/vootsindex/infographies/' ~ uneInfographie.image)}}" alt="{{uneInfographie.nom}}" class="img-thumbnail" >
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                                {% endfor %}                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class ="col-sm-2">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+                            
+<script>
+$(document).ready(function(){
+  autoPlayYouTubeModal();
+});
+
+//FUNCTION TO GET AND AUTO PLAY YOUTUBE VIDEO FROM DATATAG
+function autoPlayYouTubeModal(){
+  var trigger = $("body").find('[data-toggle="modal"]');
+  trigger.click(function() {
+    var theModal = $(this).data( "target" ),
+    videoSRC = $(this).attr( "data-theVideo" ), 
+    videoSRCauto = videoSRC+"?autoplay=1" ;
+    $(theModal+' iframe').attr('src', videoSRCauto);
+    $(theModal+' button.close').click(function () {
+        $(theModal+' iframe').attr('src', videoSRC);
+    });   
+  });
+}   
+</script>
+    
+{% endblock %}
+
+{% block javascripts %}
+             {{ parent() }}
+            <script src="{{ asset('bundles/vootsindex/jquery.sticky.js') }}"></script>
+{% endblock %}

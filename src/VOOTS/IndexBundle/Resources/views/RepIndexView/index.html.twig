@@ -7,49 +7,39 @@
 
 
 {% block body %}
-<div id="about" class="container-fluid text-center">
- 
-    <table class="table-index">
-        <tr>
-            <td>
-            <a href="{{ path('voots_index_infographies') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image1.png') }}" class="img-responsive image-cliquable"></a> 
-            </td>
-            <td>
-            <img src="{{ asset('bundles/vootsindex/tableau-index/Image2.png') }}" class="img-responsive">
-            </td>
-            <td>
-            <a href="{{ path('voots_index_videos') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image3.png') }}" class="img-responsive image-cliquable"></a>  
-            </td>
-        </tr>
-     </table>
-     <table class="table-index">    
-        <tr>
-            <td>
-            <img src="{{ asset('bundles/vootsindex/tableau-index/Image4.png') }}" class="img-responsive"> 
-            </td>
-            <td>
-            <a href="{{ path('voots_index_apropos') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image5.png') }}" class="img-responsive image-cliquable"></a>
-            </td>
-            <td>
-            <img src="{{ asset('bundles/vootsindex/tableau-index/Image6.png') }}" class="img-responsive">
-            </td>
-        </tr> 
-     </table>
-     <table class="table-index">    
-        <tr>
-            <td>
-            <a href="{{ asset('http://www.blog.voots.fr') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image7.png') }}" class="img-responsive image-cliquable"></a> 
-            </td>
-            <td>
-            <img src="{{ asset('bundles/vootsindex/tableau-index/Image8.png') }}" class="img-responsive">
-            </td>
-            <td>
-            <a href="{{ path('voots_index_coeur') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/Image9.png') }}" class="img-responsive image-cliquable"></a>
-            </td>
-        </tr>         
-    </table>
-</div> 
- <div class="image-vote-index">
+    <div class ="container-fluid notreProjet text-center">
+        <h2>Bonjour et bienvenue sur votre site de vulgarisation politique  </h2>
+        <p>Vous avez toujours voulu vous intéresser à la politique mais vous ne saviez pas par où commencer ?</p>
+        <p>Vous êtes un peu pressé mais vous avez quand même envie d'en connaître plus sur nos institutions ?</p>
+        <p>Vous avez juste envie de vous raffraichir la mémoire ou d'apprendre de façon ludique comment marche la politique de notre pays?</p>
+        <p>Quelques soient les raisons, vous êtes au bon endroit pour en apprendre un peu plus,</br> 
+            alors cliquez sur un des sujet ci-dessous pour en savoir plus!</p>
+    </div>
+    <div class="container-fluid tagNoms">
+        <div class ="row">
+            <div class="col-sm-2">
+            </div>
+            <div class ="col-sm-8">
+                        <div class="table-responsive motClesTableau">
+                            <table class="table borderless">  
+                                {% for tag in listeTags %}
+                                     {% if (loop.index % 3) == 1 %}
+                                        <tr>
+                                    {% endif %}
+                                    <td>
+                                    <a href="{{ path('voots_index_page', { 'tag': tag.nom }) }}"><button type="button" class="btn btn-tag btn-block">{{tag.nom}}</button></a>
+                                    {% if (loop.index % 3) == 0 %}
+                                         </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+            <div class="col-sm-2">
+            </div>
+        </div>
+    </div>
+ <div hidden="true" class="image-vote-index">
     <a href="{{ path('voots_index_associations') }}"><img src="{{ asset('bundles/vootsindex/tableau-index/vote_association.png') }}" class ="financement-asso"></a> 
 </div>             
 <script>
@@ -61,7 +51,7 @@ $(document).ready(function(){
             $(this).css('width', 'inherit');
             $(this).css('height', 'inherit');
           });
-    }   
+    }    
 });    
 </script> 
 {% endblock %}

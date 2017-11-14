@@ -10,23 +10,10 @@ voots_index_contact:
     path:     /contact
     defaults: { _controller:  VOOTSIndexBundle:Index:contact }
     
-voots_index_videos:
-    path:     /videos
-    defaults: { _controller:  VOOTSIndexBundle:Index:videos }
-    
-voots_index_infographies:
-    path:     /infographies
-    defaults: { _controller:  VOOTSIndexBundle:Index:infographies }
-    
-voots_index_coeur:
-    path:     /coeur
-    defaults: { _controller:  VOOTSIndexBundle:Index:coupsDeCoeur }
-     
-voots_getInfo:
-    path:     /getInfographies
-    defaults: { _controller:  VOOTSIndexBundle:Index:getInfographies }
-    methods: [post] 
-    
 voots_index_associations:
     path:     /associations
     defaults: { _controller:  VOOTSIndexBundle:Index:associations }
+    
+voots_index_page:
+    path:     /{tag}
+    defaults: { _controller:  VOOTSIndexBundle:Index:pageStandard }

@@ -5,12 +5,12 @@ namespace VOOTS\IndexBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * videos
+ * coupdecoeur
  *
- * @ORM\Table(name="videos")
- * @ORM\Entity(repositoryClass="VOOTS\IndexBundle\Repository\videosRepository")
+ * @ORM\Table(name="coupdecoeur")
+ * @ORM\Entity(repositoryClass="VOOTS\IndexBundle\Repository\coupdecoeurRepository")
  */
-class videos
+class coupdecoeur
 {
     /**
      * @var int
@@ -24,9 +24,9 @@ class videos
     /**
      * @var string
      *
-     * @ORM\Column(name="alt", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $alt;
+    private $name;
 
     /**
      * @var string
@@ -43,6 +43,13 @@ class videos
     private $image;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+    
+    /**
      * @ORM\OneToOne(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
      */
     private $tagPrincipal;    
@@ -50,6 +57,6 @@ class videos
     /**
      * @ORM\ManyToMany(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
      */
-    private $tags;
-
+    private $tags;    
 }
+

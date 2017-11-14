@@ -13,7 +13,7 @@
             <url>src/VOOTS/IndexBundle/Controller/IndexController.php</url>
             <bookmark id="2">
                 <name/>
-                <line>43</line>
+                <line>58</line>
                 <key/>
             </bookmark>
         </file>
@@ -22,10 +22,13 @@
         <group>
             <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/index.html.twig</file>
             <file>file:/C:/wamp64/www/Symfony/web/bundles/vootsindex/style_main.css</file>
-            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/coupsDeCoeur.html.twig</file>
-            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/infographiesIndex.html.twig</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Controller/IndexController.php</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Repository/infographiesRepository.php</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/pageStandard.html.twig</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Repository/explicationRepository.php</file>
+            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Repository/videosRepository.php</file>
+            <file>file:/C:/wamp64/www/Symfony/web/bundles/vootsindex/style_page_principale.css</file>
             <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/layout.html.twig</file>
-            <file>file:/C:/wamp64/www/Symfony/src/VOOTS/IndexBundle/Resources/views/RepIndexView/videosIndex.html.twig</file>
         </group>
     </open-files>
 </project-private>

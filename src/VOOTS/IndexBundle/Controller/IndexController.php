@@ -8,12 +8,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use VOOTS\IndexBundle\Entity\videos;
+use VOOTS\IndexBundle\Entity\definition;
 
 class IndexController extends Controller
 {
     public function indexAction()
     {
-          return $this->render('VOOTSIndexBundle:RepIndexView:index.html.twig');
+        $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('VOOTSIndexBundle:tag');
+        $liste_des_tags = $repository->findAll();
+        
+          return $this->render('VOOTSIndexBundle:RepIndexView:index.html.twig', array('listeTags'=>$liste_des_tags));
     }
     
     public function aproposAction()
@@ -41,35 +47,42 @@ class IndexController extends Controller
     {
           return $this->render('VOOTSIndexBundle:RepIndexView:infographiesIndex.html.twig');
     }
-
-    public function getInfographiesAction(Request $req)
-    {
-            if($req->isXMLHttpRequest())
-            {
-         
-                    $tagsNames=array((string)$req->get('tag'));
-                            $repository = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('VOOTSIndexBundle:infographies');                   
-                    $liste_des_infographies = $repository->getInfographiesWithTagsArray($tagsNames);
-
-                            $repository = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('VOOTSIndexBundle:minivoots');                   
-                    $liste_des_minivoots = $repository->getMinivootsWithTagsArray($tagsNames);
-                    
-                    return new JsonResponse(array('infographies' => $liste_des_infographies, 'minivoots' => $liste_des_minivoots));
-            }
-            return new Response ("Erreur Ajax", 400);
-    }    
     
-    public function coupsDeCoeurAction()
+    public function pageStandardAction($tag)
     {
+         //on cherche la définition
+         $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('VOOTSIndexBundle:definition');       
+         $definition = $repository->getOneDefinitionWithTagsArray(array($tag));
+         //on cherche l'explication
+         $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('VOOTSIndexBundle:explication');       
+         $explication = $repository->getOneExplicationWithTagsArray(array($tag));
+         //on cherche les infographies
         $repository = $this->getDoctrine()
-        ->getManager()
-        ->getRepository('VOOTSIndexBundle:coupdecoeur');
-        $liste_coupsdecoeur = $repository->findAll();
-          return $this->render('VOOTSIndexBundle:RepIndexView:coupsDeCoeur.html.twig', array('listecoupsdecoeur'=>$liste_coupsdecoeur));
+                ->getManager()
+                ->getRepository('VOOTSIndexBundle:infographies');                
+        $liste_des_infographies = $repository->getInfographiesWithTagsArray(array($tag));
+         //on cherche la vidéo principale
+        $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('VOOTSIndexBundle:videos');                   
+        $video_principale = $repository->getVideoPrincipaleWithTagsArray(array($tag));         
+         //on cherche les videos
+        $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('VOOTSIndexBundle:videos');                   
+        $liste_des_videos_associees = $repository->getVideosWithTagsArray(array($tag)); 
+        $enSavoirPlus = null;
+         return $this->render('VOOTSIndexBundle:RepIndexView:pageStandard.html.twig', 
+                 array('definition'=>$definition, 
+                     'explication'=>$explication, 
+                     'infographies' => $liste_des_infographies, 
+                     'video_principale' => $video_principale, 
+                     'enSavoirPlus' => $enSavoirPlus, 
+                     'videos_associees'=> $liste_des_videos_associees));
     }
     
     public function contactAction(Request $request)

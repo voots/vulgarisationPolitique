@@ -43,14 +43,27 @@ class videos
     private $image;
 
     /**
+     * @ORM\OneToOne(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
+     */
+    private $tagPrincipal;    
+    
+    /**
      * @ORM\ManyToMany(targetEntity="VOOTS\IndexBundle\Entity\tag", cascade={"persist"})
      */
     private $tags;
-    
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -130,11 +143,27 @@ class videos
     }
 
     /**
-     * Constructor
+     * Set tagPrincipal
+     *
+     * @param \VOOTS\IndexBundle\Entity\tag $tagPrincipal
+     *
+     * @return videos
      */
-    public function __construct()
+    public function setTagPrincipal(\VOOTS\IndexBundle\Entity\tag $tagPrincipal = null)
     {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tagPrincipal = $tagPrincipal;
+
+        return $this;
+    }
+
+    /**
+     * Get tagPrincipal
+     *
+     * @return \VOOTS\IndexBundle\Entity\tag
+     */
+    public function getTagPrincipal()
+    {
+        return $this->tagPrincipal;
     }
 
     /**
